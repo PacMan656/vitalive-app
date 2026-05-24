@@ -7,6 +7,8 @@ export default function RootLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="triagem" />
       <Stack.Screen name="agendamento" />
+      <Stack.Screen name="monitoramento" />
+      <Stack.Screen name="triagem-dados" />
       <Stack.Screen name="localizador" />
       <Stack.Screen name="telemedicina" />
       <Stack.Screen name="(tabs)" />

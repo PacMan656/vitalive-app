@@ -53,6 +53,26 @@ export default function TelaTriagemDados() {
       timestamp: new Date().toISOString()
     };
 
+    // DENTRO DE app/triagem-dados.js (na função enviarTriagem)
+
+VitaliveService.agendarConsulta({ type: 'REGISTRO_TRIAGEM', ...dadosTriagem }) 
+  .then(() => {
+    if (wsConectado && ws.current) {
+      ws.current.send(JSON.stringify({
+        type: 'ALERTA_TRIAGEM_EMERGENCIA',
+        ...dadosTriagem
+      }));
+    }
+
+    Alert.alert(
+      "Triagem Concluída", 
+      "Seus dados foram enviados. Acompanhe a viatura do SAMU em tempo real."
+    );
+    
+    // 🛑 ALTERE DE '/telemedicina' PARA '/monitoramento'
+    router.replace('/monitoramento'); 
+  })
+  
     // 1. Salva a triagem no banco de dados via requisição HTTP HTTP
     // (Simulando uma nova rota adicionada ao VitaliveService)
     VitaliveService.agendarConsulta({ type: 'REGISTRO_TRIAGEM', ...dadosTriagem }) 
